@@ -1,0 +1,11 @@
+<div id="searchbar">
+  <%= form_tag root_path, class: "simple_form search d-flex mt-0 mr-2", label: "Search", method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      label: "Search",
+      class: "form-control string required",
+      placeholder: "type and press 'Enter'"
+    %>
+    <%# <%= submit_tag "Search", class: "btn btn-flat" %>
+  <% end %>
+</div>
