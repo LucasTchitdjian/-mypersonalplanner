@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_135955) do
+ActiveRecord::Schema.define(version: 2022_01_03_142153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bullets", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id", null: false
+    t.string "links"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_bullets_on_person_id"
+    t.index ["user_id"], name: "index_bullets_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.date "day_start"
+    t.date "day_end"
+    t.time "hour_start"
+    t.time "hour_end"
+    t.bigint "bullet_id", null: false
+    t.boolean "done"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bullet_id"], name: "index_events_on_bullet_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +57,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_135955) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bullets", "people"
+  add_foreign_key "bullets", "users"
+  add_foreign_key "events", "bullets"
 end
