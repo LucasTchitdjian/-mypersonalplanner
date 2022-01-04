@@ -1,12 +1,11 @@
 <h1 class="title">My Personal Planner</h1>
 <div data-controller="search-bullets">
-<%= render 'shared/searchbar' %>
-  <div class="bullets" data-search-movies-target="list">
-  <ul>
-    <% @bullets.each do |bullet|  %>
-    <li> <%= bullet.content %> </li>
-    <% end %>
-  </ul>
+  <%= render 'shared/searchbar' %>
+  <div class="bullets" data-search-bullets-target="list">
+    <ul>
+      <% @bullets.each do |bullet|  %>
+      <li> <%= bullet.content %> </li>
+      <% end %>
+    </ul>
   </div>
 </div>
-

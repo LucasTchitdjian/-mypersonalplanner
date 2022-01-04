@@ -3,6 +3,9 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   static targets = ['form', 'input', 'list'];
 
+  connect(){
+    console.log(this.listTarget);
+  }
   update(event) {
     console.log(this.listTarget);
     const url = `${this.formTarget.action}?query=${this.inputTarget.value}`
