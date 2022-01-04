@@ -1,2 +1,4 @@
-<%= render "bullets", bullets: @bullets, new_bullet: @new_bullet %>
-
+<div id="searchbar" data-controller="search-bullets">
+  <%= render "shared/searchbar" %>
+  <%= render "bullets", bullets: @bullets, new_bullet: @new_bullet %>
+</div>
