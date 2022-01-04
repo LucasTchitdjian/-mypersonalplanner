@@ -9,8 +9,8 @@ class BulletsController < ApplicationController
       @bullets = Bullet.all.order(id: :asc)
     end
     respond_to do |format|
-    format.html # Follow regular flow of Rails
-    format.text { render partial: 'bullets/bullets', locals: { bullets: @bullets }, formats: [:html] }
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'bullets/bullets', locals: { bullets: @bullets }, formats: [:html] }
     end
   end
 
