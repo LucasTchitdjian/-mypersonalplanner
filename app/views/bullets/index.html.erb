@@ -1,5 +1,1 @@
-<ul>
-  <% @bullets.each do |bullet|  %>
-  <li> <%= bullet.content %> </li>
-  <% end %>
-</ul>
+<%= render "bullets", bullets: @bullets, new_bullet: @new_bullet %>
