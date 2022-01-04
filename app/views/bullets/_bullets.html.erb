@@ -9,17 +9,19 @@
             bullet_list_target: "bullet",
             action: 'keyup->bullet-list#update' }} do |f| %>
     <div class="form-inputs" data-bullet-list-target="input">
-      <%= f.text_field :content, value: bullet.content, label:false %>
+      <%= f.text_field :content, value: bullet.content, label:false, autocomplete:"off" %>
     </div>
     <% end %>
   </li>
   <% end %>
-  <li>
+  <li data-controller="new-bullet">
     <%= form_with url: bullets_path,
       method: :post, html: { id: "bullet-new",
-      data: { bullet_list_target: "new" } } do |f| %>
-    <div class="form-inputs">
-      <%= f.text_field :content, label:false %>
+      data: {
+        new_bullet_target: "new",
+        action: 'submit->new-bullet#create'  } } do |f| %>
+    <div class="form-inputs" data-new-bullet-target="input">
+      <%= f.text_field :content, label:false, autocomplete:"off" %>
     </div>
     <% end %>
   </li>
