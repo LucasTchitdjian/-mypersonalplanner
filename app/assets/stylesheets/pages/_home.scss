@@ -11,16 +11,22 @@ a:hover {
 
 .sign-in {
   position: absolute;
-  left: 89%;
+  left: 87%;
   color: #0c1016;
 }
 
 
 #outer {
   width: 164px;
-  text-align: center;
+  // text-align: center;
 }
 
 h2 {
   text-align: center;
+  font-family: $title-font;
+  font-size: 64px;
+}
+
+.homebtn:hover {
+  filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
 }

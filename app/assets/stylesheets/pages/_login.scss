@@ -7,6 +7,25 @@
 
 .login-form {
   border: solid white;
+  border-radius: 10px;
   margin: 20px;
   padding: 20px;
+}
+
+.login-links {
+  color: white;
+}
+
+.login-links:hover {
+  color: rgb(216, 2, 134);
+}
+
+.email:focus {
+  box-shadow: none;
+  border-color: black;
+}
+
+.password:focus {
+  box-shadow: none;
+  border-color: black;
 }
