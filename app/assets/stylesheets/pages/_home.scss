@@ -9,18 +9,18 @@ a:hover {
   color: white;
 }
 
-
-
-.form-inputs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.sign-in {
+  position: absolute;
+  left: 89%;
+  color: #0c1016;
 }
 
-.form-actions {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+#outer {
+  width: 164px;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
 }
