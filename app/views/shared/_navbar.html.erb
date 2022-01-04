@@ -12,6 +12,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
+<<<<<<< HEAD
         <li class="nav-item active">
           <%= render 'shared/searchbar' %>
         </li>
@@ -21,6 +22,18 @@
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "login-out" %>
           </li>
     </div>
+=======
+        <%# <li class="nav-item active">
+        </li> %>
+        <li class="nav-item dropdown">
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Action", "#", class: "dropdown-item" %>
+            <%= link_to "Another action", "#", class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+>>>>>>> 2e80428e917b3d3e03b5867d6d2fb1a510a5b3bb
       <% else %>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "login-out" %>
