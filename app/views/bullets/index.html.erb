@@ -1,5 +1,10 @@
-<ul>
-  <% @bullets.each do |bullet|  %>
-  <li> <%= bullet.content %> </li>
-  <% end %>
-</ul>
+<div data-controller="search-bullets">
+<%= render 'shared/searchbar' %>
+  <div class="bullets" data-search-movies-target="list">
+  <ul>
+    <% @bullets.each do |bullet|  %>
+    <li> <%= bullet.content %> </li>
+    <% end %>
+  </ul>
+  </div>
+</div>

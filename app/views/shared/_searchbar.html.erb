@@ -1,10 +1,17 @@
-<div id="searchbar">
-  <%= form_tag root_path, class: "simple_form search d-flex mt-0 mr-2", label: "Search", method: :get do %>
+<div id="searchbar" data-controller="search-bullets">
+  <%= form_tag root_path,
+    class: "simple_form search d-flex mt-0 mr-2",
+    label: "Search",
+    method: :get,
+    data: { search_bullets_target: 'form' } do %>
+
     <%= text_field_tag :query,
       params[:query],
       label: "Search",
       class: "form-control string required",
-      placeholder: "type and press 'Enter'"
+      placeholder: "type and press 'Enter'",
+      data: { search_bullets_target: 'input', action: 'keyup->search-bullets#update' }
+
     %>
     <%# <%= submit_tag "Search", class: "btn btn-flat" %>
   <% end %>
