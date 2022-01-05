@@ -47,3 +47,25 @@ h2 {
   border: none;
   box-shadow: none;
 }
+
+.homebtn:hover {
+  filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
+}
+
+.main-div {
+  display: flex;
+}
+
+.bullet-list {
+  padding-top: 20px;
+  width: 75%;
+  // flex-grow: 1;
+}
+
+#calendar {
+  margin: 0 auto;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
