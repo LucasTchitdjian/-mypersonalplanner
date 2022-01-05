@@ -6,19 +6,24 @@
 }
 
 .login-form {
-  border: solid white;
+  border: solid var(--primary-color);
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
 }
 
 .login-links {
-  color: white;
+  color: var(--primary-color);
+}
+
+.login-form .my-button:hover {
+  color: var(--secondary-color);
 }
 
 .login-links:hover {
   color: rgb(216, 2, 134);
 }
+
 
 .email:focus {
   box-shadow: none;
@@ -29,3 +34,35 @@
   box-shadow: none;
   border-color: black;
 }
+
+.password {
+  color: var(--primary-color);
+}
+
+.email {
+  color: var(--primary-color);
+}
+
+.form-check {
+  color: var(--primary-color);
+}
+
+.dark-theme #user_email {
+  color: var(--secondary-color);
+}
+
+.dark-theme #user_password {
+  color: var(--secondary-color);
+}
+
+#user_email {
+  color: var(--primary-color);
+}
+
+#user_password {
+  color: var(--primary-color);
+}
+
+// input[type="checkbox"]:checked {
+//   color: var(--primary-color);
+// }

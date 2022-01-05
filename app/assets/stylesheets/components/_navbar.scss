@@ -1,6 +1,10 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: var(--secondary-color);
+}
+
+.navbar-lewagon.dark-theme {
+  background: var(--primary-color);
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -9,4 +13,58 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+// .homebtn:hover {
+//   filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
+// }
+
+
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
+
+.label {
+	background-color: var(--primary-color);
+	border-radius: 50px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	position: relative;
+  right: 400%;
+	height: 26px;
+	width: 50px;
+	transform: scale(1.5);
+}
+
+.label .ball {
+	background-color: var(--secondary-color);
+	border-radius: 50%;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 22px;
+	width: 22px;
+	transform: translateX(0px);
+	transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball {
+	transform: translateX(24px);
+}
+
+
+.fa-moon {
+	color: #f1c40f;
+}
+
+.fa-sun {
+	color: #f39c12;
+}
+
+body.dark-theme img {
+  filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
 }

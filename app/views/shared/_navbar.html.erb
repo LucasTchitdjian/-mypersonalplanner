@@ -3,7 +3,6 @@
     <%= image_tag "https://i0.wp.com/grapheostudio.fr/wp-content/uploads/2020/10/Logo-Maison.png?ssl=1", class: "homebtn" %>
   <% end %>
 
-
   <%# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button> %>
@@ -17,6 +16,14 @@
     <%= link_to "Login", new_user_session_path, class: "my-button" %>
     <% end %>
   </div>
+  <div>
+	<input type="checkbox" class="checkbox" id="chk" />
+	<label class="label" for="chk">
+		<i class="fas fa-moon"></i>
+		<i class="fas fa-sun"></i>
+		<div class="ball"></div>
+	</label>
+</div>
 </div>
 
 
