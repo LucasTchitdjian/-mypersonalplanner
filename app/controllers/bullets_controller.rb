@@ -18,7 +18,7 @@ class BulletsController < ApplicationController
     @bullet = Bullet.new(bullet_params)
     @bullet.user = @user
     if @bullet.save
-      redirect_to root_path
+      redirect_to root_path(anchor: "bullet-#{@bullet.id}")
     else
       render 'index'
     end

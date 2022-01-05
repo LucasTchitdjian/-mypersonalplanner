@@ -1,0 +1,12 @@
+<%= simple_form_for(bullet,
+  html: { id: "bullet-new",
+    data: { bullet_list_target: "new",
+      action: "submit->bullet-list#create"
+    }
+  }) do |f| %>
+  <div class="form-inputs">
+    <%# <%= f.text_field :content, label:false %>
+    <%= f.input :content, as: :text %>
+    <%= f.button :submit %>
+  </div>
+<% end %>
