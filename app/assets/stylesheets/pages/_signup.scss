@@ -6,8 +6,12 @@
 }
 
 .signup-form {
-  border: solid white;
+  border: solid var(--primary-color);
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
+}
+
+.dark-theme .form-actions .my-button:hover {
+  color: var(--primary-color);
 }

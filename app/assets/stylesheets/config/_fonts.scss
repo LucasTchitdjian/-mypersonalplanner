@@ -7,6 +7,16 @@ $body-font: "BlinkMacSystemFont","-apple-system","Segoe UI","Roboto","Oxygen","U
 $headers-font: "BlinkMacSystemFont","-apple-system","Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial","sans-serif";
 $title-font: 'Indie Flower', cursive;
 
+:root {
+  --primary-color: black;
+  --secondary-color: white;
+}
+
+.dark-theme {
+  --primary-color: white;
+  --secondary-color: black;
+}
+
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";

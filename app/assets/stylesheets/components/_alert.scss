@@ -3,4 +3,11 @@
   bottom: 16px;
   right: 16px;
   z-index: 1000;
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: solid var(--primary-color);
+}
+
+.alert-dismissible .close {
+  color: var(--primary-color);
 }

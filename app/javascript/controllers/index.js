@@ -19,3 +19,4 @@ require("flatpickr/dist/flatpickr.css")
 application.register('flatpickr', Flatpickr)
 
 // --- from https://github.com/adrienpoly/stimulus-flatpickr
+
