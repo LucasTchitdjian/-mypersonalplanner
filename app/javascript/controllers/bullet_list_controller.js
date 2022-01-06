@@ -1,5 +1,5 @@
 import { Controller } from "stimulus";
-import { csrfToken } from "@rails/ujs";
+// import { csrfToken } from "@rails/ujs";
 
 export default class extends Controller {
   static targets = ['bullet', 'input', "liBullet"];
@@ -8,10 +8,6 @@ export default class extends Controller {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
     console.log(this.bulletTarget);
-    // Comment marche DATAFORM ??
-    // let toto = new FormData(this.bulletTarget)
-    // console.dir(toto)
-    // console.log(toto.values());
     fetch(url, {
       method: 'PATCH',
       headers: { 'Accept': 'text/plain' },
@@ -19,11 +15,10 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
       })
-  }
 
-  destroy(event){
-    if (event.ctrlKey && event.key === "Backspace"){
-      // console.log('hello');
+    // fonction destroy bullet avec ctrl + backspace
+    if (event.ctrlKey && event.key === "Backspace") {
+      console.log('hello');
       const url = this.bulletTarget.action
       fetch(url, {
         method: 'DELETE',
@@ -31,12 +26,14 @@ export default class extends Controller {
         // 'Content-Type': "application/json",
         // 'X-CSRF-Token': csrfToken()
       })
-      .then(response => {
-        // response.json()
-      })
-      .then((data)=> {
-      })
+        .then(response => {
+          // response.json()
+        })
+        .then((data) => {
+        })
       this.liBulletTarget.remove();
     }
   }
+
+
 }
