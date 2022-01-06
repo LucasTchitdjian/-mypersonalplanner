@@ -1,14 +1,53 @@
 <div id="calendar">
-  <%= form_with model: Bullet.new, authenticity_token: true do |f| %>
-    <%= f.text_field :start_time,
-      data: {
-        controller: "flatpickr",
-        flatpickr_date_format: "Y-m-d",
-        # flatpickr_min_date: Time.zone.now,
-        flatpickr_close_on_select: "false",
-        flatpickr_inline: "true",
-        flatpickr_month_selector_type: "dropdown",
-        flatpickr_week_numbers: "true"
-      } %>
-  <% end %>
+  <div class="calendar-top">
+    <%= form_with model: Bullet.new, authenticity_token: true do |f| %>
+      <%= f.text_field :start_time,
+        data: {
+          controller: "flatpickr",
+          flatpickr_date_format: "Y-m-d",
+          # flatpickr_min_date: Time.zone.now,
+          flatpickr_close_on_select: "false",
+          flatpickr_inline: "true",
+          flatpickr_month_selector_type: "dropdown",
+          flatpickr_week_numbers: "true"
+        } %>
+    <% end %>
+  </div>
+  <div class="events-container">
+    <div class="event">
+      <div class="title">
+    <p>Documentaire Marcelo Bielsa 21h</p>
+      </div>
+      <div class="time">
+        <div class="time-from">
+        <p>12:00</p>
+        </div>
+        <div class="time-to">
+        <p>14:00</p>
+        </div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="title">
+        <p>Acheter le pain</p>
+      </div>
+      <div class="time">
+        <p>--:--</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

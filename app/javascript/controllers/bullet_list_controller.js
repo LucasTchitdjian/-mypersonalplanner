@@ -2,11 +2,13 @@ import { Controller } from "stimulus";
 import { csrfToken } from "@rails/ujs";
 
 export default class extends Controller {
-  static targets = ['bullet', 'input', 'bulletevent'];
+  static targets = ['bullet', 'input', 'bulletevent', 'liBullet'];
+
 
   update(event) {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
+    console.log(this.bulletTarget);
     fetch(url, {
       method: 'PATCH',
       headers: { 'Accept': 'text/plain' },
@@ -14,6 +16,24 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
       })
+
+    // fonction destroy bullet avec ctrl + backspace
+    if (event.ctrlKey && event.key === "Backspace") {
+      console.log('hello');
+      const url = this.bulletTarget.action
+      fetch(url, {
+        method: 'DELETE',
+        'Accept': "application/json",
+        // 'Content-Type': "application/json",
+        // 'X-CSRF-Token': csrfToken()
+      })
+        .then(response => {
+          // response.json()
+        })
+        .then((data) => {
+        })
+      this.liBulletTarget.remove();
+    }
   }
 
   // create_event(event) {
@@ -67,6 +87,7 @@ export default class extends Controller {
         console.log(data["title"])
       });
   }
+
 
 
 

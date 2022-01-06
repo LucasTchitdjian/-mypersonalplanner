@@ -1,0 +1,21 @@
+.events-container {
+  height: 250px;
+  width: auto;
+  border: solid black;
+}
+
+.event {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+  margin: 20px 0px;
+}
+
+.time {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.title {
+  margin-left: 5px;
+}

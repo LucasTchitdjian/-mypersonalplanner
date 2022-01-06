@@ -1,5 +1,6 @@
 class BulletsController < ApplicationController
   before_action :set_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @new_bullet = Bullet.new
@@ -7,9 +8,9 @@ class BulletsController < ApplicationController
     @events = Event.all
     @new_event = Event.new
     if params["query"].present?
-      @bullets = Bullet.search_by_content(params["query"])
+      @bullets = current_user.bullets.search_by_content(params["query"])
     else
-      @bullets = Bullet.all.order(id: :asc)
+      @bullets = current_user.bullets.order(id: :asc)
     end
     respond_to do |format|
       format.html # Follow regular flow of Rails
@@ -21,7 +22,7 @@ class BulletsController < ApplicationController
     @bullet = Bullet.new(bullet_params)
     @bullet.user = @user
     if @bullet.save
-      redirect_to root_path
+      redirect_to root_path(anchor: "bullet-#{@bullet.id}")
     else
       render 'index'
     end
@@ -33,6 +34,12 @@ class BulletsController < ApplicationController
   end
 
   def destroy
+    @bullet = Bullet.find(params[:id])
+    @bullet.destroy
+    respond_to do |format|
+      format.html # { redirect_to root_path, notice: "Destroyed !" }
+      format.json # { head :no_content }
+    end
   end
 
 private
