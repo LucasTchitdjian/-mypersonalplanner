@@ -18,8 +18,22 @@
 
 span.flatpickr-day.today {
   color: red;
+  border: none;
 }
 
 div.flatpickr-calendar.hasWeeks.animate.inline {
   border-radius: 5px 5px 0 0;
+  border-bottom: none;
+  // border: solid red 0px;
+}
+
+span.flatpickr-day.selected {
+  background: #d80286;
+  border-color: #d80286;
+}
+
+span.flatpickr-day.selected:hover {
+  background: white;
+  border-color: black;
+  color: black;
 }
