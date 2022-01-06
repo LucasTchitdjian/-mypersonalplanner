@@ -5,9 +5,9 @@ class BulletsController < ApplicationController
   def index
     @new_bullet = Bullet.new
     if params["query"].present?
-      @bullets = Bullet.search_by_content(params["query"])
+      @bullets = current_user.bullets.search_by_content(params["query"])
     else
-      @bullets = Bullet.all.order(id: :asc)
+      @bullets = current_user.bullets.order(id: :asc)
     end
     respond_to do |format|
       format.html # Follow regular flow of Rails
