@@ -9,21 +9,13 @@ export default class extends Controller {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
     console.log(this.bulletTarget);
-    fetch(url, {
-      method: 'PATCH',
-      headers: { 'Accept': 'text/plain' },
-      body: new FormData(this.bulletTarget)})
-      .then(response => response.text())
-      .then((data) => {
-      })
-
     // fonction destroy bullet avec ctrl + backspace
     if (event.ctrlKey && event.key === "Backspace") {
       console.log('hello');
       const url = this.bulletTarget.action
       fetch(url, {
         method: 'DELETE',
-        'Accept': "application/json",
+        'Accept': "application/json"
         // 'Content-Type': "application/json",
         // 'X-CSRF-Token': csrfToken()
       })
@@ -34,6 +26,14 @@ export default class extends Controller {
         })
       this.liBulletTarget.remove();
     }
+    fetch(url, {
+      method: 'PATCH',
+      headers: { 'Accept': 'text/plain' },
+      body: new FormData(this.bulletTarget)})
+      .then(response => response.text())
+      .then((data) => {
+      })
+
   }
 
   // create_event(event) {
