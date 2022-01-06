@@ -1,7 +1,6 @@
 <div id="searchbar" data-controller="search-bullets">
   <div class="main-div">
     <%= render "bullets", bullets: @bullets, new_bullet: @new_bullet %>
-    <%= render "calendar", bullets: @bullets, new_bullet: @new_bullet %>
-    <%= render "events/events", events: @events, new_event: @new_event %>
+    <%= render "calendar", events: @events, new_event: @new_event %>
   </div>
 </div>

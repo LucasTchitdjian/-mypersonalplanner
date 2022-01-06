@@ -14,65 +14,17 @@
     <% end %>
   </div>
   <div class="events-container">
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Documentaire Marcelo Bielsa 21h</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>12:00</p>
+    <% events.each do |event| %>
+      <div id=<%="event-#{event.id}"%> class="event">
+        <div class="title">
+          <p id="title-content"><%= event.title %></p>
+        </div>
+        <div class="time">
+          <div class="time-from">
+            <p><%= event.hour_start %></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Acheter le pain</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>--:--</p>
-        </div>
-      </div>
-    </div>
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Faire les courses</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>--:--</p>
-        </div>
-      </div>
-    </div>
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Passer l'aspirateur</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>--:--</p>
-        </div>
-      </div>
-    </div>
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Jouer a fifa</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>--:--</p>
-        </div>
-      </div>
-    </div>
-    <div class="event">
-      <div class="title">
-        <p id="title-content">Anniversaire de Bamba Dieng</p>
-      </div>
-      <div class="time">
-        <div class="time-from">
-        <p>--:--</p>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
