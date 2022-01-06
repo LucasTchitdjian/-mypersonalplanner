@@ -1,5 +1,6 @@
 class BulletsController < ApplicationController
   before_action :set_user
+  skip_before_action :verify_authenticity_token
 
   def index
     @new_bullet = Bullet.new
@@ -30,6 +31,12 @@ class BulletsController < ApplicationController
   end
 
   def destroy
+    @bullet = Bullet.find(params[:id])
+    @bullet.destroy
+    respond_to do |format|
+      format.html # { redirect_to root_path, notice: "Destroyed !" }
+      format.json # { head :no_content }
+    end
   end
 
 private
