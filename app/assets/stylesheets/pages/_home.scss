@@ -40,20 +40,20 @@ h2 {
   font-size: 64px;
 }
 
-
 #query {
   background-color: var(--secondary-color);
-  color: var(--primary-color);
   border: none;
   box-shadow: none;
+  color: var(--primary-color);
 }
 
-.homebtn:hover {
-  filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
+#query::placeholder {
+  color: var(--primary-color);
 }
 
 .main-div {
   display: flex;
+  align-items: space-between;
 }
 
 .bullet-list {
