@@ -8,11 +8,23 @@
           { id: "bullet-#{bullet.id}",
             data: {
               bullet_list_target: "bullet",
-              action: 'keyup->bullet-list#update' }} do |f| %>
+              action: 'keyup->bullet-list#update',
+              action: 'keydown->bullet-list#create_event' }} do |f| %>
       <div class="form-inputs" data-bullet-list-target="input">
         <%= f.text_field :content, value: bullet.content, label:false %>
       </div>
       <% end %>
+      <%= form_with url: events_path,
+          method: :post,
+          html:
+            { data: {
+                bullet_list_target: "bulletevent",
+                action: 'click->bullet-list#create_event'
+            }} do |f| %>
+            <%= f.text_field :bullet_id, value: bullet.id, label:false %>
+            <%= f.text_field :title, value: bullet.content, label:false %>
+            <%= f.date_field :day_start, value: Date.today, label:false %>
+            <% end %>
     </li>
     <% end %>
     <li>
