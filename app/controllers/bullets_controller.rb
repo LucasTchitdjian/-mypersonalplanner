@@ -4,6 +4,9 @@ class BulletsController < ApplicationController
 
   def index
     @new_bullet = Bullet.new
+    @date = Date.current.to_date
+    @events = Event.all
+    @new_event = Event.new
     if params["query"].present?
       @bullets = current_user.bullets.search_by_content(params["query"])
     else

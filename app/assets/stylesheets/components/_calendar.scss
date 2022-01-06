@@ -3,13 +3,14 @@
 }
 
 #bullet_start_time {
-  color: white;
-  visibility: hidden;
+  // color: white;
+  color: black;
+  // visibility: hidden;
   border: none;
   margin: 0;
   padding: 0;
-  height: 1px;
-  font-size: 1px;
+  // height: 1px;
+  // font-size: 1px;
 }
 
 #bullet_start_time:focus {

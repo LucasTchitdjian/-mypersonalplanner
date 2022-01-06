@@ -1,0 +1,9 @@
+<ul class="event-list">
+  <% events.each do |event| %>
+  <li data-controller="event-list">
+    <div id=<%="event-#{event.id}" %>><%= event.title %></div>
+    <div class="event-hour-start"> <%= event.hour_start %></div>
+    <div class="event-hour-end"> <%= event.hour_end %></div>
+  </li>
+  <% end %>
+</ul>
