@@ -1,14 +1,14 @@
 <div class="events-container">
-  <div id=<%="event-#{event.id}"%> class="event">
-    <% events.each do |event| %>
-    <div class="title">
-      <p id="title-content"><%= event.title %></p>
-    </div>
-    <div class="time">
-      <div class="time-from">
-        <p><%= event.hour_start %></p>
+  <% events.each do |event| %>
+    <div id=<%="event-#{event.id}"%> class="event">
+      <div class="title">
+        <p id="title-content"><%= event.title %></p>
+      </div>
+      <div class="time">
+        <div class="time-from">
+          <p><%= event.hour_start ? event.hour_start.strftime("%H:%M") : "--:--" %></p>
+        </div>
       </div>
     </div>
-    <% end %>
-  </div>
+  <% end %>
 </div>

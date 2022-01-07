@@ -13,18 +13,5 @@
         } %>
     <% end %>
   </div>
-  <div class="events-container">
-    <% events.each do |event| %>
-      <div id=<%="event-#{event.id}"%> class="event">
-        <div class="title">
-          <p id="title-content"><%= event.title %></p>
-        </div>
-        <div class="time">
-          <div class="time-from">
-            <p><%= event.hour_start %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render "events/events", events: events, new_event: new_event %>
 </div>

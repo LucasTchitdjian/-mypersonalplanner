@@ -58,3 +58,20 @@ Bullet.create(content: "Réserver restaurant pour le 03/02",
 Bullet.create(content: "Aller chercher les croquettes pour le chat",
   user: User.all.sample)
 puts "...#{Bullet.all.count} users created"
+
+Event.create(title: "je veux partir", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux aller", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux pas", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux mangera", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "lslslsld", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "dldldlld", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "coxoxoox", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "azosoxo", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux partir", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux aller", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux pas", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux mangera", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux partir", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux aller", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux pas", day_start: "2022-01-06", bullet_id: Bullet.last.id)
+Event.create(title: "je veux mangera", day_start: "2022-01-06", bullet_id: Bullet.last.id)
