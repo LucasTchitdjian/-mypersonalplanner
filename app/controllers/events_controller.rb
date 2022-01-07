@@ -28,6 +28,18 @@ class EventsController < ApplicationController
     # end
   end
 
+  def update
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    respond_to do |format|
+      format.html # { redirect_to root_path, notice: "Destroyed !" }
+      format.json # { head :no_content }
+    end
+  end
+
   private
 
   def event_params
