@@ -1,12 +1,27 @@
 .events-container {
-  height: auto;
+  height: 200px;
   width: auto;
   border-top: none;
   background: rgba(255,255,255,0.05);
   border-radius: 0 0 5px 5px;
   box-shadow: 0px 0px 0px 1px  #e6e6e6;
   // color: transparent;
+  overflow-y: scroll;
 }
+
+.events-container::-webkit-scrollbar {
+  width: 2px;
+}
+
+.events-container::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
+}
+
+
+// .scroller {
+//   overflow: scroll;
+// }
 
 .event {
   display: flex;
@@ -30,6 +45,14 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+  width: 38px;
+  text-align: center;
+}
+
+.time-from {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title {
