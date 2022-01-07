@@ -1,18 +1,19 @@
 import { Controller } from "stimulus";
 import { csrfToken } from "@rails/ujs";
+import event_list_controller from "./event_list_controller";
 
 export default class extends Controller {
   static targets = ['bullet', 'input', 'liBullet', 'inputDate', 'eventCreate', "dateNow"];
 
-  create_event(event){
-    event.preventDefault();
-    console.log(this.eventCreateTarget);
+  // get eventListController() {
+  //   return this.application.getControllerForElementAndIdentifier(this.element, "eventList")
+  // }
 
-  }
   update(event) {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
     let inputValue = this.inputTarget.querySelector('input')
+    console.log(inputValue.value)
     let bulletId = this.bulletTarget.id.replace("bullet-", "")
     console.log(this.dateNowTarget.textContent);
     // create event with :;
@@ -41,9 +42,21 @@ export default class extends Controller {
       })
         .then(response => response.json())
         .then((data) => {
-          console.log(data)
-          console.log(data["title"])
+          const eventList = document.querySelector("#events-list");
+          eventList.insertAdjacentHTML("beforeend",
+            `<div id="event-${data.id}" class="event">
+            <div class="title">
+              <p id="title-content">${data.title}</p>
+            </div>
+            <div class="time">
+              <div class="time-from">
+               <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+              </div>
+            </div>
+          </div>`)
         });
+      this.liBulletTarget.remove();
+
     }
     // fonction destroy bullet avec ctrl + backspace
     if (event.ctrlKey && event.key === "Backspace") {
@@ -68,7 +81,8 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
       })
-  }
+
+    }
 
   // create_event(event) {
   //   event.preventDefault();

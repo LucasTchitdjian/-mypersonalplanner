@@ -2,7 +2,7 @@
     <%= render "shared/searchbar" %>
   <ul>
     <% bullets.each do |bullet|  %>
-    <li data-controller="bullet-list" data-bullet-list-target="liBullet">
+    <li data-controller="bullet-list eventList" data-bullet-list-target="liBullet" data-eventList-target="liBullet">
       <p class="d-none" data-bullet-list-target="dateNow"><%= Date.today %></p>
       <%= form_with url: bullet_path(bullet),
         method: :patch,
@@ -11,7 +11,7 @@
           { id: "bullet-#{bullet.id}",
             data: {
               bullet_list_target: "bullet",
-              action: 'keyup->bullet-list#update' }} do |f| %>
+              action: 'keyup->bullet-list#update toto->eventList#updateList' }} do |f| %>
       <div class="form-inputs" data-bullet-list-target="input" draggable="true">
         <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false %>
       </div>
