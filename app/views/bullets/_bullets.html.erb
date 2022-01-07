@@ -3,6 +3,7 @@
   <ul>
     <% bullets.each do |bullet|  %>
     <li data-controller="bullet-list" data-bullet-list-target="liBullet">
+      <p class="d-none" data-bullet-list-target="dateNow"><%= Date.today %></p>
       <%= form_with url: bullet_path(bullet),
         method: :patch,
         local: false,
@@ -15,17 +16,6 @@
         <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false %>
       </div>
       <% end %>
-      <%= form_with url: events_path,
-          method: :post,
-          html:
-            { data: {
-                bullet_list_target: "bulletevent",
-                action: 'click->bullet-list#create_event'
-            }} do |f| %>
-            <%= f.text_field :bullet_id, value: bullet.id, label:false %>
-            <%= f.text_field :title, value: bullet.content, label:false %>
-            <%= f.date_field :day_start, value: Date.today, label:false %>
-            <% end %>
     </li>
     <% end %>
     <li>

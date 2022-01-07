@@ -2,16 +2,51 @@ import { Controller } from "stimulus";
 import { csrfToken } from "@rails/ujs";
 
 export default class extends Controller {
-  static targets = ['bullet', 'input', 'bulletevent', 'liBullet'];
+  static targets = ['bullet', 'input', 'liBullet', 'inputDate', 'eventCreate', "dateNow"];
 
+  create_event(event){
+    event.preventDefault();
+    console.log(this.eventCreateTarget);
 
+  }
   update(event) {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
-    console.log(this.bulletTarget);
+    let inputValue = this.inputTarget.querySelector('input')
+    let bulletId = this.bulletTarget.id.replace("bullet-", "")
+    console.log(this.dateNowTarget.textContent);
+    // create event with :;
+    if (event.key === ":" && event.ctrlKey) {
+      //insert form for Date
+      this.inputTarget.insertAdjacentHTML("afterend", `
+        <input data-bullet-list-target="inputDate" value="${this.dateNowTarget.textContent}" label="false" type="date" name="day_start" id="day_start">
+      `)
+    }
+
+    if (event.ctrlKey && event.key === "Enter") {
+      let dateStart
+      try {
+        dateStart = this.inputDateTarget.value;
+      } catch (error) {
+        dateStart = this.dateNowTarget.textContent;
+      }
+      const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
+      // le Form ne s affiche pas en entier
+      fetch(urlEvent, {
+        method: 'POST',
+        headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
+        // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
+        body: JSON.stringify({ "title": inputValue.value, "day_start": dateStart, "bullet_id": bulletId })
+        // body: new FormData(this.bulleteventTarget)
+      })
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data)
+          console.log(data["title"])
+        });
+    }
     // fonction destroy bullet avec ctrl + backspace
     if (event.ctrlKey && event.key === "Backspace") {
-      console.log('hello');
       const url = this.bulletTarget.action
       fetch(url, {
         method: 'DELETE',
@@ -33,7 +68,6 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
       })
-
   }
 
   // create_event(event) {
@@ -67,29 +101,25 @@ export default class extends Controller {
   //   })
   // }
 
-  create_event(event) {
-    event.preventDefault();
-    console.log(this.bulleteventTarget);
-    console.dir(this.bulleteventTarget);
-    // print
-    const toto = new FormData(this.bulleteventTarget)
-    console.log(toto);
-    // print
+  // create_event(event) {
+  //   event.preventDefault();
+  //   // print
+  //   for (var value of new FormData(this.bulleteventTarget).values()) {
+  //     console.log(value);
+  //   }
 
-    fetch(this.bulleteventTarget.action, {
-      method: 'POST',
-      headers: { 'Accept': "application/json", 'X-CSRF-Token': csrfToken() },
-      body: new FormData(this.bulleteventTarget)
-    })
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data)
-        console.log(data["title"])
-      });
-  }
-
-
-
-
+  //   fetch(this.bulleteventTarget.action, {
+  //     method: 'POST',
+  //     headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
+  //     // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
+  //     body: JSON.stringify({ "title": "je veux mangera des kebabs", "day_start": "2022-01-06", "bullet_id": "171" })
+  //     // body: new FormData(this.bulleteventTarget)
+  //   })
+  //   .then(response => response.json())
+  //   .then((data) => {
+  //     console.log(data)
+  //     console.log(data["title"])
+  //   });
+  // }
 
 }
