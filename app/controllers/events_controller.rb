@@ -14,6 +14,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     # @event.start_date = Date.current.to_date
+    if @event.bullet_id
+      @bullet = Bullet.find(@event.bullet_id)
+      @bullet.status = "planned"
+      @bullet.save!
+    end
     @event.save!
     respond_to do |format|
       format.html
