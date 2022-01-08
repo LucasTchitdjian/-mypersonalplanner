@@ -2,7 +2,7 @@
     <%= render "shared/searchbar" %>
   <ul>
     <% bullets.each do |bullet|  %>
-    <li data-controller="bullet-list eventList" data-bullet-list-target="liBullet" data-eventList-target="liBullet">
+    <li data-controller="bullet-list eventList" data-bullet-list-target="liBullet" data-eventList-target="liBullet" draggable="true">
       <p class="d-none" data-bullet-list-target="dateNow"><%= Date.today %></p>
       <%= form_with url: bullet_path(bullet),
         method: :patch,

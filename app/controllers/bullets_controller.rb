@@ -10,7 +10,7 @@ class BulletsController < ApplicationController
     if params["query"].present?
       @bullets = current_user.bullets.search_by_content(params["query"])
     else
-      @bullets = current_user.bullets.order(id: :asc)
+      @bullets = current_user.bullets.where(status: [nil, ""]).order(id: :asc)
     end
     respond_to do |format|
       format.html # Follow regular flow of Rails
