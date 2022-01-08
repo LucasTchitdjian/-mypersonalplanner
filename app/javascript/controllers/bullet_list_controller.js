@@ -13,9 +13,9 @@ export default class extends Controller {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
     let inputValue = this.inputTarget.querySelector('input')
-    console.log(inputValue.value)
+    // console.log(inputValue.value)
     let bulletId = this.bulletTarget.id.replace("bullet-", "")
-    console.log(this.dateNowTarget.textContent);
+    //console.log(this.dateNowTarget.textContent);
     // create event with :;
     if (event.key === ":" && event.ctrlKey) {
       //insert form for Date
@@ -26,10 +26,11 @@ export default class extends Controller {
 
     if (event.ctrlKey && event.key === "Enter") {
       let dateStart
+      let dateCalendar = this.dateNowTarget.textContent
       try {
         dateStart = this.inputDateTarget.value;
       } catch (error) {
-        dateStart = this.dateNowTarget.textContent;
+        dateStart = dateCalendar;
       }
       const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
       // le Form ne s affiche pas en entier
@@ -43,17 +44,21 @@ export default class extends Controller {
         .then(response => response.json())
         .then((data) => {
           const eventList = document.querySelector("#events-list");
-          eventList.insertAdjacentHTML("beforeend",
-            `<div id="event-${data.id}" class="event">
-            <div class="title">
-              <p id="title-content">${data.title}</p>
-            </div>
-            <div class="time">
-              <div class="time-from">
-               <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+          console.log(dateStart);
+          console.log(dateCalendar);
+          if (dateStart === dateCalendar) {
+            eventList.insertAdjacentHTML("beforeend",
+              `<div id="event-${data.id}" class="event">
+              <div class="title">
+                <p id="title-content">${data.title}</p>
               </div>
-            </div>
-          </div>`)
+              <div class="time">
+                <div class="time-from">
+                 <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+                </div>
+              </div>
+            </div>`)
+          }
         });
       this.liBulletTarget.remove();
 

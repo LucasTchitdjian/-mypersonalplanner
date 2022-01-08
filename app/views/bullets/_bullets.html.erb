@@ -11,7 +11,7 @@
           { id: "bullet-#{bullet.id}",
             data: {
               bullet_list_target: "bullet",
-              action: 'keyup->bullet-list#update toto->eventList#updateList' }} do |f| %>
+              action: 'keyup->bullet-list#update' }} do |f| %>
       <div class="form-inputs" data-bullet-list-target="input" draggable="true">
         <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false %>
       </div>

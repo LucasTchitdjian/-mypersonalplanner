@@ -3,8 +3,8 @@ class EventsController < ApplicationController
 
   def index
     @new_event = Event.new
-    @date = Date.current.to_date
-    @events = Event.all
+    params[:day_start] ? @date = params[:day_start] : @date = Date.current.to_date
+    @events = Event.where(day_start: @date)
   end
 
   def new
