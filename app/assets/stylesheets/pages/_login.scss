@@ -9,7 +9,11 @@
   border: solid var(--primary-color);
   border-radius: 10px;
   margin: 20px;
-  padding: 20px;
+  padding: 30px;
+}
+
+.form-inputs {
+  font-size: 15px;
 }
 
 .login-links {
@@ -37,10 +41,12 @@
 
 .password {
   color: var(--primary-color);
+  font-size: 23px;
 }
 
 .email {
   color: var(--primary-color);
+  font-size: 23px;
 }
 
 .form-check {
