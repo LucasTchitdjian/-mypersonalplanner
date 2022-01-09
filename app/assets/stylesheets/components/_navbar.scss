@@ -2,6 +2,53 @@
   display: flex;
   justify-content: space-between;
   background: var(--secondary-color);
+  border-bottom: solid var(--primary-color);
+  border-top: solid var(--primary-color);
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+}
+
+
+.animation-typing p {
+  font-family: IBM Plex Mono, monospace;
+  font-size: 45px;
+  font-weight: lighter;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  animation: typing 3.5s steps(22);
+}
+
+.animation-typing p::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 1px;
+  background: var(--primary-color);
+  right: 0;
+  top: 0;
+  animation: cursor 1s infinite;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  from {width: 0;}
+  to {width: 105%}
 }
 
 .navbar-lewagon.dark-theme {

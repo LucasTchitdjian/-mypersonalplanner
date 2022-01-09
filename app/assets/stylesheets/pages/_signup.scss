@@ -8,10 +8,15 @@
 .signup-form {
   border: solid var(--primary-color);
   border-radius: 10px;
-  margin: 20px;
-  padding: 20px;
+  margin: 22px;
+  padding: 30px;
 }
 
 .dark-theme .form-actions .my-button:hover {
   color: var(--primary-color);
 }
+
+.form-actions > .my-button:hover {
+  color:var(--secondary-color);
+}
+
