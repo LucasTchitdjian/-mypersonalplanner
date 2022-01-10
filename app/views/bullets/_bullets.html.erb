@@ -12,7 +12,7 @@
             data: {
               bullet_list_target: "bullet",
               action: 'keyup->bullet-list#update' }} do |f| %>
-      <div class="form-inputs" data-bullet-list-target="input" draggable="true">
+      <div class="form-inputs" data-bullet-list-target="input" draggable="true" ondragstart="onDragStart(event);">
         <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false %>
       </div>
       <% end %>

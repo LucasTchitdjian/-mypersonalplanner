@@ -20,15 +20,17 @@ ActiveStorage.start()
 
 // External imports
 import "bootstrap";
-import { darkMode } from '../packs/darkmode';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { darkMode } from '../packs/darkmode';
+// import { dragDrop } from '../packs/dragdrop';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   darkMode();
+  // dragDrop();
 });
 
 import "controllers";

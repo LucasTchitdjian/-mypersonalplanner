@@ -19,5 +19,50 @@
     <%= render 'shared/flashes' %>
 
     <%= yield %>
+    <script>
+    function onDragStart(event) {
+      event
+        .dataTransfer
+        .setData('text/plain', event.target.id);
+
+      event
+      .currentTarget
+      .style
+      .backgroundColor = 'yellow';
+    }
+
+    function onDragOver(event) {
+      event.preventDefault();
+    }
+
+    function onDrop(event) {
+      const id = event
+        .dataTransfer
+        .getData('text');
+
+      const draggableElement = document.getElementById(id);
+      const dropzone = event.target;
+
+      console.log(draggableElement)
+      // dropzone.appendChild(draggableElement)
+      dropzone.insertAdjacentHTML("beforeend",
+              `<div id="event-${data.id}" class="event">
+              <div class="title">
+                <p id="title-content">${data.title}</p>
+              </div>
+              <div class="time">
+                <div class="time-from">
+                 <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+                </div>
+              </div>
+            </div>`);
+
+
+      event
+        .dataTransfer
+        .clearData();
+    }
+
+    </script>
   </body>
 </html>
