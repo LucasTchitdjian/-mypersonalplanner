@@ -57,11 +57,9 @@ export default class extends Controller {
             </div>
           </div>`)
         });
-<<<<<<< HEAD
+
       this.liBulletTarget.classList.add("planned");
       setTimeout(() => { this.liBulletTarget.remove(); }, 1000);
-=======
->>>>>>> 49ae4f3d96df22901079678b45cf987b77c407ba
 
     }
     // fonction destroy bullet avec ctrl + backspace
