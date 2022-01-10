@@ -9,3 +9,9 @@
   outline: none;
   border: none;
 }
+
+.draggable{ /* adds styling to the items/names that are going to be draggable */
+    padding:1rem;
+    background-color: yellow;
+    cursor: move;
+}
