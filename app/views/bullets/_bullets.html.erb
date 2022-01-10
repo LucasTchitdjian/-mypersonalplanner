@@ -1,4 +1,4 @@
-<div class="bullet-list" data-search-bullets-target="list">
+<div class="bullet-list" data-search-bullets-target="list" id="bullet-list" data-controller="drag-item" data-action="dragstart->drag-item#dragstart ondragend->drag-item#dragend ondragenter->drag-item#dragenter ondragleave->drag-item#dragleave ondrop->drag-item#dragdrop">
     <%= render "shared/searchbar" %>
   <ul>
     <% bullets.each do |bullet|  %>
@@ -8,12 +8,13 @@
         method: :patch,
         local: false,
         html:
-          { id: "bullet-#{bullet.id}",
+          {
+            id: "bullet-#{bullet.id}",
             data: {
               bullet_list_target: "bullet",
               action: 'keyup->bullet-list#update' }} do |f| %>
-      <div class="form-inputs" data-bullet-list-target="input" draggable="true">
-        <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false %>
+      <div class="form-inputs" data-bullet-list-target="input" draggable="true" ondragstart="onDragStart(event);" ondrag="onDrag(event);">
+        <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false, draggable:"true"%>
       </div>
       <% end %>
     </li>

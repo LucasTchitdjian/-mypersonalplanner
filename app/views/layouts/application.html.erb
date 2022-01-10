@@ -12,6 +12,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+
   </head>
 
   <body>
@@ -19,5 +20,88 @@
     <%= render 'shared/flashes' %>
 
     <%= yield %>
+    <script>
+
+      function onDragStart(event) {
+        event
+          .dataTransfer
+          .setData('text/plain', event.target.id);
+
+        event
+          .currentTarget
+          .style
+          .backgroundColor = 'yellow';
+          console.dir(event);
+
+        dropzone = document.querySelector('#events-list')
+        console.dir(dropzone)
+          dropzone
+          .style
+          .backroundColor = "red";
+      }
+
+      function onDrag(event) {
+      console.log("TOTO EST EN TRAIN DE DRAGUER")
+      }
+
+      function onDragOver(event) {
+        event.preventDefault();
+        console.log("TOTO se positionne sur la dropzone")
+      }
+
+      function onDrop(event) {
+        const id = event
+          .dataTransfer
+          .getData('text');
+
+        const draggableElement = document.getElementById(id);
+        const dropzone = event.target;
+        console.log("TOTO a droppé sur la dropzone")
+        console.log(id)
+        console.dir(draggableElement)
+        let urlEvent
+        if (draggableElement.baseURI.includes("bullet")) {
+          urlEvent = draggableElement.baseURI.replace(/#bullet-\d+/,"events");
+        } else {
+          urlEvent = `${draggableElement.baseURI}events`;
+        }
+        // replace(/#bullet-\d+/, "events");
+        console.log(urlEvent)
+        const title = draggableElement.value
+        console.log(title);
+        const date = "2022-01-06"
+        const bulletId = draggableElement.form.id.replace(/bullet-/,"");
+        console.log(bulletId)
+        const token = draggableElement.parentElement.previousElementSibling.value
+        console.log(token);
+        fetch(urlEvent, {
+          method: 'POST',
+          headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': token },
+          body: JSON.stringify({ "title": title, "day_start": date, "bullet_id": bulletId })
+        })
+          .then(response => response.json())
+          .then((data) => {
+            const eventList = document.querySelector("#events-list");
+            // if (dateStart === dateCalendar) {
+            //   eventList.insertAdjacentHTML("beforeend",
+            //     `<div id="event-${data.id}" class="event">
+            //     <div class="title">
+            //       <p id="title-content">${data.title}</p>
+            //     </div>
+            //     <div class="time">
+            //       <div class="time-from">
+            //       <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+            //       </div>
+            //     </div>
+            //   </div>`)
+            // }
+          })
+
+        event
+          .dataTransfer
+          .clearData();
+      }
+
+    </script>
   </body>
 </html>

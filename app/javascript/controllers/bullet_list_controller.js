@@ -83,6 +83,8 @@ export default class extends Controller {
 
     }
 
+
+
   // create_event(event) {
   //   event.preventDefault();
   //   // console.log pour tester
@@ -134,5 +136,6 @@ export default class extends Controller {
   //     console.log(data["title"])
   //   });
   // }
+
 
 }
