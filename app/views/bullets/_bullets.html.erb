@@ -3,7 +3,7 @@
   <ul>
     <% bullets.each do |bullet|  %>
     <li data-controller="bullet-list" data-bullet-list-target="liBullet" data-eventList-target="liBullet" draggable="true">
-      <p class="d-none" data-bullet-list-target="dateNow"><%= Date.today %></p>
+      <p class="d-none" id="today" data-bullet-list-target="dateNow"><%= Date.today %></p>
       <%= form_with url: bullet_path(bullet),
         method: :patch,
         local: false,
@@ -13,7 +13,7 @@
             data: {
               bullet_list_target: "bullet",
               action: 'keyup->bullet-list#update' }} do |f| %>
-      <div class="form-inputs" data-bullet-list-target="input" draggable="true" ondragstart="onDragStart(event);" ondrag="onDrag(event);">
+      <div class="form-inputs" data-bullet-list-target="input" draggable="true" ondragstart="onDragStart(event);" ondragend="onDragEnd(event);" ondrag="onDrag(event);">
         <%= f.text_field :content, autocomplete: "off", value: bullet.content, label:false, draggable:"true"%>
       </div>
       <% end %>

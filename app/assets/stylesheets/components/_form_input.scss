@@ -10,8 +10,7 @@
   border: none;
 }
 
-.draggable{ /* adds styling to the items/names that are going to be draggable */
-    padding:1rem;
-    background-color: yellow;
-    cursor: move;
+.planned #content {
+  text-decoration: line-through;
+  color: grey;
 }

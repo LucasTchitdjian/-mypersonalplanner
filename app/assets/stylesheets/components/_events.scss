@@ -18,6 +18,12 @@
   border-radius: 10px;
 }
 
+.events-container.dropzone {
+  background-color: rgba(136, 167, 214, 0.418);
+  border-radius: 10px;
+  // border: rgb(72, 44, 201) solid 1px;
+}
+
 
 // .scroller {
 //   overflow: scroll;
@@ -35,13 +41,15 @@
   border-bottom: none;
 }
 
+
+
 .time {
   margin-left: 10px;
   margin-right: 5px;
   margin-top: 18px;
   font-size: 14px;
   line-height: 24px;
-  font-family: 'Nunito';
+  // font-family: 'Nunito';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -60,7 +68,7 @@
   margin-top: 18px;
   font-size: 14px;
   // line-height: 24px;
-  font-family: 'Nunito';
+  // font-family: 'Nunito';
   font-style: normal;
   font-weight: 400;
   font-display: swap;

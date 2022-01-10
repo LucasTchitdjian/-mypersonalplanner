@@ -25,81 +25,91 @@
       function onDragStart(event) {
         event
           .dataTransfer
-          .setData('text/plain', event.target.id);
+          // .setData('text/plain', event.target.id);
+          .setData('text/plain', event.path[2].id.replace("bullet-",""))
 
-        event
-          .currentTarget
-          .style
-          .backgroundColor = 'yellow';
-          console.dir(event);
+        event.dataTransfer.dropEffect = "move";
 
-        dropzone = document.querySelector('#events-list')
-        console.dir(dropzone)
-          dropzone
-          .style
-          .backroundColor = "red";
+        // event
+        //   .currentTarget
+        //   .style
+        //   .backgroundColor = 'yellow';
+
+      dropzone = document.querySelector('#events-list')
+      dropzone.classList.add("dropzone");
+      console.log(dropzone);
       }
 
       function onDrag(event) {
-      console.log("TOTO EST EN TRAIN DE DRAGUER")
+      }
+
+      function onDragEnter(event) {
+        event.preventDefault();
+        dropzone = document.querySelector('#events-list');
+        dropzone.classList.add("dropzone");
+        // .style.backgroundColor = "rgba(74, 74, 196, 0.418)";
+
       }
 
       function onDragOver(event) {
         event.preventDefault();
-        console.log("TOTO se positionne sur la dropzone")
+
+      }
+
+      function onDragEnd(event) {
+        event.preventDefault();
+        console.log("DRAG END")
+        dropzone = document.querySelector('#events-list');
+        dropzone.classList.remove("dropzone");
       }
 
       function onDrop(event) {
-        const id = event
-          .dataTransfer
-          .getData('text');
-
-        const draggableElement = document.getElementById(id);
+        const id = event.dataTransfer.getData('text');
+        const draggableElement = document.getElementById(`bullet-${id}`);
         const dropzone = event.target;
-        console.log("TOTO a droppé sur la dropzone")
-        console.log(id)
-        console.dir(draggableElement)
         let urlEvent
         if (draggableElement.baseURI.includes("bullet")) {
           urlEvent = draggableElement.baseURI.replace(/#bullet-\d+/,"events");
         } else {
           urlEvent = `${draggableElement.baseURI}events`;
         }
-        // replace(/#bullet-\d+/, "events");
-        console.log(urlEvent)
-        const title = draggableElement.value
-        console.log(title);
-        const date = "2022-01-06"
-        const bulletId = draggableElement.form.id.replace(/bullet-/,"");
-        console.log(bulletId)
+        const title = draggableElement[2].value;
+        let dateStart;
+        if (document.querySelector("#bullet_start_time").value === "" ) {
+          dateStart = document.querySelector("#today").innerHTML;
+        } else {
+          dateStart = document.querySelector("#bullet_start_time").value;
+        }
+        const bulletId = event.dataTransfer.getData("text/plain");
         const token = draggableElement.parentElement.previousElementSibling.value
-        console.log(token);
         fetch(urlEvent, {
           method: 'POST',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': token },
-          body: JSON.stringify({ "title": title, "day_start": date, "bullet_id": bulletId })
+          body: JSON.stringify({ "title": title, "day_start": dateStart, "bullet_id": bulletId })
         })
           .then(response => response.json())
           .then((data) => {
             const eventList = document.querySelector("#events-list");
-            // if (dateStart === dateCalendar) {
-            //   eventList.insertAdjacentHTML("beforeend",
-            //     `<div id="event-${data.id}" class="event">
-            //     <div class="title">
-            //       <p id="title-content">${data.title}</p>
-            //     </div>
-            //     <div class="time">
-            //       <div class="time-from">
-            //       <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
-            //       </div>
-            //     </div>
-            //   </div>`)
-            // }
+              eventList.insertAdjacentHTML("beforeend",
+                `<div id="event-${data.id}" class="event">
+                <div class="title">
+                  <p id="title-content">${data.title}</p>
+                </div>
+                <div class="time">
+                  <div class="time-from">
+                  <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+                  </div>
+                </div>
+              </div>`)
           })
+          console.log(draggableElement);
+          draggableElement.classList.add("planned");
+          setTimeout(() => {  draggableElement.parentElement.remove(); }, 1000);
 
         event
           .dataTransfer
           .clearData();
+          console.log(event)
       }
 
     </script>
