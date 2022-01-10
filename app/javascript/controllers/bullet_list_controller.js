@@ -41,20 +41,22 @@ export default class extends Controller {
         .then((data) => {
           const eventList = document.querySelector("#events-list");
           console.log(dateStart);
-          console.log(dateCalendar);
-            eventList.insertAdjacentHTML("beforeend",
-              `<div id="event-${data.id}" class="event">
-              <div class="title">
-                <p id="title-content">${data.title}</p>
+          console.log(dateCalendar)
+          this.liBulletTarget.remove();
+          // this.liBulletTarget.classList.add("btn-primary")
+
+          eventList.insertAdjacentHTML("beforeend",
+            `<div id="event-${data.id}" class="event">
+            <div class="title">
+              <p id="title-content">${data.title}</p>
+            </div>
+            <div class="time">
+              <div class="time-from">
+              <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
               </div>
-              <div class="time">
-                <div class="time-from">
-                 <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
-                </div>
-              </div>
-            </div>`)
+            </div>
+          </div>`)
         });
-      this.liBulletTarget.remove();
 
     }
     // fonction destroy bullet avec ctrl + backspace
