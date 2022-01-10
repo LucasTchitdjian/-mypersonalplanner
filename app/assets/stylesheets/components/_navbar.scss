@@ -4,6 +4,9 @@
   background: var(--secondary-color);
   border-bottom: solid var(--primary-color);
   border-top: solid var(--primary-color);
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 }
 
 .right-container {
