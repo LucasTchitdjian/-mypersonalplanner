@@ -5,7 +5,8 @@ class BulletsController < ApplicationController
   def index
     @new_bullet = Bullet.new
     @date = Date.current.to_date
-    @events = Event.where(day_start: @date)
+    # @events = cuEvent.where(day_start: @date)
+    @events = current_user.events.where(day_start: @date)
     @new_event = Event.new
     if params["query"].present?
       @bullets = current_user.bullets.where(status: [nil, ""]).search_by_content(params["query"])
@@ -15,6 +16,16 @@ class BulletsController < ApplicationController
     respond_to do |format|
       format.html # Follow regular flow of Rails
       format.text { render partial: 'bullets/bullets', locals: { bullets: @bullets }, formats: [:html] }
+    end
+  end
+
+  def events
+    date = params["query"].gsub("date_start:", "")
+    @events = current_user.events.where(day_start: date).order(id: :asc)
+    # @events = Event.all
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'events/events', locals: { events: @events }, formats: [:html] }
     end
   end
 

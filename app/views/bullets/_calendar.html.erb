@@ -1,4 +1,4 @@
-<div id="calendar">
+<div id="calendar" data-controller="event-list">
   <div class="calendar-top">
     <%= form_with model: Bullet.new, authenticity_token: true do |f| %>
       <%= f.text_field :start_time,
@@ -9,7 +9,9 @@
           flatpickr_close_on_select: "false",
           flatpickr_inline: "true",
           flatpickr_month_selector_type: "dropdown",
-          flatpickr_week_numbers: "true"
+          flatpickr_week_numbers: "true",
+          event_list_target: "inputDate",
+          action: 'change->event-list#showEventsByDay'
         } %>
     <% end %>
   </div>
