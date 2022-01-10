@@ -1,8 +1,8 @@
 <%= form_tag root_path,
-  class: "simple_form search d-flex mt-0 mr-2",
+  class: "simple_form search d-flex mt-0 mr-2 inputPgSearch",
   label: "Search",
   method: :get,
-  data: { search_bullets_target: 'form' } do %>
+  data: { search_bullets_target: 'form', event_list_target:'inputSearch' } do %>
 
   <%= text_field_tag :query,
     params[:query],

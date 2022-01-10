@@ -1,13 +1,8 @@
 import { Controller } from "stimulus";
 import { csrfToken } from "@rails/ujs";
-import event_list_controller from "./event_list_controller";
 
 export default class extends Controller {
-  static targets = ['bullet', 'input', 'liBullet', 'inputDate', 'eventCreate', "dateNow"];
-
-  // get eventListController() {
-  //   return this.application.getControllerForElementAndIdentifier(this.element, "eventList")
-  // }
+  static targets = ['bullet', 'input', 'liBullet', 'inputDate', "dateNow"];
 
   update(event) {
     event.preventDefault();
@@ -25,13 +20,14 @@ export default class extends Controller {
     }
 
     if (event.ctrlKey && event.key === "Enter") {
-      let dateStart
+      let dateStart = document.querySelector("#bullet_start_time").value;
+      console.log();
       let dateCalendar = this.dateNowTarget.textContent
-      try {
-        dateStart = this.inputDateTarget.value;
-      } catch (error) {
-        dateStart = dateCalendar;
-      }
+      // try {
+      //   // dateStart = this.inputDateTarget.value;
+      // } catch (error) {
+      //   dateStart = dateCalendar;
+      // }
       const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
       // le Form ne s affiche pas en entier
       fetch(urlEvent, {
@@ -46,7 +42,6 @@ export default class extends Controller {
           const eventList = document.querySelector("#events-list");
           console.log(dateStart);
           console.log(dateCalendar);
-          if (dateStart === dateCalendar) {
             eventList.insertAdjacentHTML("beforeend",
               `<div id="event-${data.id}" class="event">
               <div class="title">
@@ -58,7 +53,6 @@ export default class extends Controller {
                 </div>
               </div>
             </div>`)
-          }
         });
       this.liBulletTarget.remove();
 
