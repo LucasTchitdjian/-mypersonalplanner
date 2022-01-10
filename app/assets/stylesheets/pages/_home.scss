@@ -55,9 +55,12 @@ h2 {
 .main-div {
   display: flex;
   align-items: space-between;
+  padding-top: 100px;
 }
 
 .bullet-list {
+  position: relative;
+  // background-color: red;
   padding-top: 20px;
   width: 75%;
   // flex-grow: 1;

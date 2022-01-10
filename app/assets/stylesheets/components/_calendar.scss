@@ -1,5 +1,8 @@
 #calendar {
   padding-right: 10px;
+  height: 84vh;
+  position: sticky;
+  top: 80px;
 }
 
 #bullet_start_time {
@@ -19,7 +22,21 @@
 
 span.flatpickr-day.today {
   color: red;
-  border: none;
+  box-shadow: 0px 0px 0px 0px  #e6e6e6;
+}
+
+span.flatpickr-day.today::after {
+  content: "";
+  border: solid black;
+  position: absolute;
+  border-radius: 50%;
+  top: 75%;
+  right: 41%;
+}
+
+span.flatpickr-day.today:hover {
+  color: black;
+  background-color: transparent;
 }
 
 div.flatpickr-calendar.hasWeeks.animate.inline {
@@ -31,10 +48,20 @@ div.flatpickr-calendar.hasWeeks.animate.inline {
 span.flatpickr-day.selected {
   background: #d80286;
   border-color: #d80286;
+  color: white;
+}
+
+span.flatpickr-day.selected::after {
+  content: "";
+  border: solid black;
+  position: absolute;
+  border-radius: 50%;
+  top: 75%;
+  right: 41%;
 }
 
 span.flatpickr-day.selected:hover {
-  background: white;
+  background-color: #d80286;
   border-color: black;
   color: black;
 }
