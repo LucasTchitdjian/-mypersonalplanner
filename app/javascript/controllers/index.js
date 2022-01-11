@@ -13,8 +13,15 @@ application.load(definitionsFromContext(context))
 import Flatpickr from 'stimulus-flatpickr'
 
 // Import style for flatpickr
-require("flatpickr/dist/flatpickr.css")
-// require("flatpickr/dist/dark.css")
+if (localStorage.getItem('darkMode') !== "enabled") {
+  console.log("Salut");
+  require("flatpickr/dist/flatpickr.css");
+} else {
+  console.log("Ciao");
+  require("flatpickr/dist/themes/dark.css");
+}
+
+
 
 // Manually register Flatpickr as a stimulus controller
 application.register('flatpickr', Flatpickr)

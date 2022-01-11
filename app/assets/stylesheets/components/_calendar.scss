@@ -42,7 +42,14 @@ span.flatpickr-day.today:hover {
 div.flatpickr-calendar.hasWeeks.animate.inline {
   border-radius: 5px 5px 0 0;
   border-bottom: none;
-  // border: solid red 0px;
+}
+
+.dark-theme div.flatpickr-calendar.hasWeeks.animate.inline {
+  border: solid 1px var(--primary-color);
+}
+
+.dark-theme .flatpickr-weekwrapper .flatpickr-weeks {
+  box-shadow: 0px 0 0 var(--primary-color);
 }
 
 span.flatpickr-day.selected {
