@@ -1,0 +1,7 @@
+meta_product_name: "my Personal Planner"
+meta_title: "my Personal Planner - Stay organized. Stay in peace."
+meta_description: "my Personal Planner helps you capture any information and to
+position them on agenda. This way, you'll always remember what you need to do,
+and when you decided to do it"
+meta_image: "myPersonalPlanner.jpg" # should exist in `app/assets/images/`
+twitter_account: "@myPersonalPlan2"   # required for Twitter Cards
