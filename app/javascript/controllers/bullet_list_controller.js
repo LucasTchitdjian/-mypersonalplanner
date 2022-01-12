@@ -34,6 +34,8 @@ export default class extends Controller {
       // } catch (error) {
       //   dateStart = dateCalendar;
       // }
+
+      // BUG ICI
       const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
       // le Form ne s affiche pas en entier
       fetch(urlEvent, {
@@ -84,69 +86,28 @@ export default class extends Controller {
         })
       this.liBulletTarget.remove();
     }
+
+    // Ajout de Resonsable @person a la bullet
+    let formData = new FormData(this.bulletTarget)
+    for (var value of formData) {
+      if (value[0] === "content") {
+        // if value contains @ recupere le name de la personne et stocke dans une variable
+        if (value[1].match(/@(\w+)/)) {
+          let personName = value[1].match(/@(\w+)/)[1];
+          // ajoute @person dans FormData
+          console.log(personName);
+          formData.append('person', personName);
+        }
+      }
+    }
     fetch(url, {
       method: 'PATCH',
       headers: { 'Accept': 'text/plain' },
-      body: new FormData(this.bulletTarget)})
+      body: formData
+    })
       .then(response => response.text())
       .then((data) => {
+        // console.log(data);
       })
-
-    }
-
-
-
-  // create_event(event) {
-  //   event.preventDefault();
-  //   // console.log pour tester
-  //   console.log(this.bulleteventTarget.parentElement.firstElementChild[2].value);
-  //   console.dir(this.bulleteventTarget);
-  //   // console.log pour tester
-  //   const url = `${this.bulleteventTarget}events`;
-  //   console.log(url); // test
-
-  //   const content = this.bulleteventTarget.parentElement.firstElementChild[2].value;
-  //   let data = { title: content,
-  //      done: true}
-  //   const request = new Request(url, {
-  //     method: 'POST',
-  //     body: data,
-  //     headers: { 'Accept': "application/json", 'X-CSRF-Token': csrfToken() }
-  //   })
-
-  //   console.log(data);
-  //   console.log(request);
-
-  //   fetch(request)
-  //     .then(response => console.log(response))
-  //     .then((data) => { console.log(data)
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   "Accept": "application/json" },
-      // body: data.to_json
-  //   })
-  // }
-
-  // create_event(event) {
-  //   event.preventDefault();
-  //   // print
-  //   for (var value of new FormData(this.bulleteventTarget).values()) {
-  //     console.log(value);
-  //   }
-
-  //   fetch(this.bulleteventTarget.action, {
-  //     method: 'POST',
-  //     headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
-  //     // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
-  //     body: JSON.stringify({ "title": "je veux mangera des kebabs", "day_start": "2022-01-06", "bullet_id": "171" })
-  //     // body: new FormData(this.bulleteventTarget)
-  //   })
-  //   .then(response => response.json())
-  //   .then((data) => {
-  //     console.log(data)
-  //     console.log(data["title"])
-  //   });
-  // }
-
-
+  }
 }

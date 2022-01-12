@@ -53,6 +53,14 @@ class BulletsController < ApplicationController
     end
   end
 
+   def list_people
+    @people = current_user.bullets.pluck(:person).compact
+    respond_to do |format|
+      format.html { render json: @people }
+      format.json { render json: @people }
+    end
+  end
+
 private
 
   def bullet_params
