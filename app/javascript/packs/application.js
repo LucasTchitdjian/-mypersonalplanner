@@ -25,12 +25,14 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 import { darkMode } from '../packs/darkmode';
 // import { dragDrop } from '../packs/dragdrop';
+import { questionBtn } from '../packs/questionbtn'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   darkMode();
   // dragDrop();
+  questionBtn();
 });
 
 import "controllers";

@@ -14,6 +14,13 @@
   align-items: center;
 }
 
+#questionbtn {
+  margin-bottom: 10px;
+  margin-right: 5px;
+  border: none;
+  background-color: var(--secondary-color);
+}
+
 
 .animation-typing p {
   font-family: IBM Plex Mono, monospace;
@@ -119,3 +126,21 @@
 body.dark-theme img {
   filter: invert(100%) sepia(13%) saturate(3%) hue-rotate(130deg) brightness(100%) contrast(100%);
 }
+
+.shortcuts-container {
+  text-align: center;
+  line-height: 4em;
+  white-space: pre-line;
+  position: absolute;
+  top: 22%;
+  right: 40%;
+  width: 500px;
+  height: 300px;
+  z-index: 1;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color:  var(--secondary-color);
+  background-color: var(--primary-color);
+  opacity: 0.75;
+}
+
