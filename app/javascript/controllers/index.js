@@ -17,7 +17,6 @@ if (localStorage.getItem('darkMode') !== "enabled") {
   console.log("Salut");
   require("flatpickr/dist/flatpickr.css");
 } else {
-  console.log("Ciao");
   require("flatpickr/dist/themes/dark.css");
 }
 

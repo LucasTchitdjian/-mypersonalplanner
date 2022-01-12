@@ -45,6 +45,24 @@ class EventsController < ApplicationController
     end
   end
 
+  def eventscount
+    month = params["query"]
+    i = 1
+    @days = []
+    while i <= 31 do 
+      @days << ["2022-#{month}-0#{i}", Event.where(day_start: "2022-#{month}-0#{i}").count] unless i > 9
+      @days << ["2022-#{month}-#{i}", Event.where(day_start: "2022-#{month}-#{i}").count] unless i < 10 
+      i += 1
+    end
+    
+     respond_to do |format|
+      format.html { render json: @days } 
+      format.json { render json: @days } 
+     end
+    # format.js
+  end
+
+
   private
 
   def event_params
