@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :bullets, only: [:create, :update, :destroy]
   get '/events', to: "bullets#events", as: :events_list
   get '/eventscount', to: "events#eventscount", as: :eventscount
+  get '/listpeople', to: "bullets#list_people", as: :list_people
   resources :events, only: [:index, :new, :create, :update, :destroy]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
