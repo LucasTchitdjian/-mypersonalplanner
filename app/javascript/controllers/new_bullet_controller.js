@@ -5,6 +5,7 @@ export default class extends Controller {
 
   create(event) {
     event.preventDefault();
+    console.log("TAMERE")
 // console.log(`${this.newTarget.action}`);
     const url = `${this.newTarget.action}`;
     fetch(url, {

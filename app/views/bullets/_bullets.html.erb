@@ -22,9 +22,10 @@
     <li>
       <%= form_with url: bullets_path,
         method: :post,
-        local: false,
+        # local: false,
         html: { id: "bullet-new",
-          data: { bullet_list_target: "new" } } do |f| %>
+          data: { bullet_list_target: "new",
+          action: 'submit->bullet-list#create'} } do |f| %>
       <div class="form-inputs">
         <%= f.text_field :content, autofocus: true, autocomplete: "off", label:false %>
       </div>

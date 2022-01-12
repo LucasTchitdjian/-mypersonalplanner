@@ -104,7 +104,9 @@
           dateStart = document.querySelector("#bullet_start_time").value;
         }
         const bulletId = event.dataTransfer.getData("text/plain");
-        const token = draggableElement.parentElement.previousElementSibling.value
+        // console.dir(draggableElement)
+        const token = 0;
+        // const token = draggableElement.parentElement.previousElementSibling.value
         fetch(urlEvent, {
           method: 'POST',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': token },
@@ -135,7 +137,7 @@
 
       }
 
-      const mettreLesPoints = (year, month) => {
+      let mettreLesPoints = (year, month) => {
           fetch(`/eventscount/?query=${year}-${month}`, {
           method: 'GET',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json" },
