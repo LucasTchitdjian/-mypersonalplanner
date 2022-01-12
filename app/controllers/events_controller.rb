@@ -53,8 +53,8 @@ class EventsController < ApplicationController
     i = 1
     @days = []
     while i <= 31 do
-      @days << ["#{year}-#{month}-0#{i}", Event.where(day_start: "#{year}-#{month}-0#{i}").count] unless i > 9
-      @days << ["#{year}-#{month}-#{i}", Event.where(day_start: "#{year}-#{month}-#{i}").count] unless i < 10
+      @days << ["#{year}-#{month}-0#{i}", current_user.events.where(day_start: "#{year}-#{month}-0#{i}").count] unless i > 9
+      @days << ["#{year}-#{month}-#{i}", current_user.events.where(day_start: "#{year}-#{month}-#{i}").count] unless i < 10
       i += 1
     end
 
