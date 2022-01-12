@@ -4,6 +4,12 @@ import { csrfToken } from "@rails/ujs";
 export default class extends Controller {
   static targets = ['bullet', 'input', 'liBullet', 'inputDate', "dateNow"];
 
+  connect() {
+    let datesSelect = document.querySelectorAll('[aria-label="January 3, 2022"]');
+  }
+
+
+
   update(event) {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
