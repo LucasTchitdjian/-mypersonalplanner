@@ -132,11 +132,11 @@
         event
           .dataTransfer
           .clearData();
-          
+
       }
 
-      const mettreLesPoints = () => {
-          fetch("/eventscount/?query=01", {
+      const mettreLesPoints = (year, month) => {
+          fetch(`/eventscount/?query=${year}-${month}`, {
           method: 'GET',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json" },
         })
@@ -144,19 +144,20 @@
           .then((data) => {
             data.forEach(element => {
                 if (element[1] !== 0 ) {
-                  let day 
+                  let day
                   if (element[0].slice(-2) < 10) {
                     day = element[0].slice(-1)
                   } else {
                     day = element[0].slice(-2)
                   }
-                  const divachercher = `January ${day}, 2022`
+                  const monthsInLetters = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                  const divachercher = `${monthsInLetters[month - 1]} ${day}, ${year}`
                   const jouravecdespoints = document.querySelector(`[aria-label="${divachercher}"`)
                   if (element[1] === 1) {
                     jouravecdespoints.classList.add("niktarace_green");
                   } else if (element[1] <= 3) {
                     jouravecdespoints.classList.add("niktarace_orange");
-                  } else { 
+                  } else {
                     jouravecdespoints.classList.add("niktarace_red");
                   }
                 }
@@ -164,16 +165,23 @@
             });
           }
 
-      window.onload = () => { mettreLesPoints() }
+      window.onload = () => {
+        month = (parseInt(document.querySelector(".flatpickr-monthDropdown-months").value, 10) + 1)
+        year = document.querySelector(".cur-year").value
+        mettreLesPoints(year, month) }
       const calendarTop = document.querySelector(".calendar-top")
       calendarTop.addEventListener("click", (event) => {
-        mettreLesPoints();
+        month = (parseInt(document.querySelector(".flatpickr-monthDropdown-months").value, 10) + 1)
+        year = document.querySelector(".cur-year").value
+        mettreLesPoints(year, month);
       });
       const calendarDays = document.querySelector("#bullet_start_time")
       calendarDays.addEventListener("change", (event) => {
-        mettreLesPoints();
+        month = (parseInt(document.querySelector(".flatpickr-monthDropdown-months").value, 10) + 1)
+        year = document.querySelector(".cur-year").value
+        mettreLesPoints(year, month);
       });
-       
+
 
     </script>
   </body>
