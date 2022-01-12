@@ -33,10 +33,15 @@ class BulletsController < ApplicationController
     @bullet = Bullet.new(bullet_params)
     @bullet.user = @user
     if @bullet.save
-      redirect_to root_path(anchor: "bullet-#{@bullet.id}")
+      # redirect_to root_path(anchor: "bullet-#{@bullet.id}")
+      redirect_to root_path
     else
       render 'index'
     end
+    # respond_to do |format|
+    #   format.html
+    #   format.json
+    # end
   end
 
   def update

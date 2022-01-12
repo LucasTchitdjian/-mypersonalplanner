@@ -8,6 +8,19 @@ export default class extends Controller {
     let datesSelect = document.querySelectorAll('[aria-label="January 3, 2022"]');
   }
 
+  create(event){
+    event.preventDefault();
+    const url = "";
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
+      body: new FormData(this.newTarget)
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
 
 
   update(event) {
@@ -46,8 +59,6 @@ export default class extends Controller {
         .then(response => response.json())
         .then((data) => {
           const eventList = document.querySelector("#events-list");
-          console.log(dateStart);
-          console.log(dateCalendar)
           this.liBulletTarget.remove();
           // this.liBulletTarget.classList.add("btn-primary")
 
