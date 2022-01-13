@@ -65,11 +65,7 @@ class BulletsController < ApplicationController
 
   def bullets_of_others
     @bullets = current_user.bullets.where(status: "Delegated")
-    @events = current_user.events.where(day_start: @date).order(id: :asc)
-    respond_to do |format|
-      format.html { render 'bullets/index', locals: { bullets: @bullets, events: @events }, formats: [:html] }
-      format.text { render partial: 'bullets/bullets', locals: { bullets: @bullets }, formats: [:html] }
-    end
+    @new_bullet = Bullet.new
   end
 
   def list_people
