@@ -6,7 +6,7 @@ class BulletsController < ApplicationController
     @new_bullet = Bullet.new
     @date = Date.current.to_date
     # @events = cuEvent.where(day_start: @date)
-    @events = current_user.events.where(day_start: @date)
+    @events = current_user.events.where(day_start: @date).order(id: :asc)
     @new_event = Event.new
     if params["query"].present?
       @bullets = current_user.bullets.where(status: [nil, ""]).search_by_content(params["query"])
@@ -47,6 +47,11 @@ class BulletsController < ApplicationController
   def update
     @bullet = Bullet.find(params[:id])
     @bullet.update(bullet_params)
+    respond_to do |format|
+      format.json { render json: @bullet }
+      format.html
+      format.text
+    end
   end
 
   def destroy
@@ -58,18 +63,27 @@ class BulletsController < ApplicationController
     end
   end
 
-   def list_people
-    @people = current_user.bullets.pluck(:person).compact
+  def bullets_of_others
+    @bullets = current_user.bullets.where(status: "Delegated")
+    @events = current_user.events.where(day_start: @date).order(id: :asc)
     respond_to do |format|
-      format.html { render json: @people }
-      format.json { render json: @people }
+      format.html { render 'bullets/index', locals: { bullets: @bullets, events: @events }, formats: [:html] }
+      format.text { render partial: 'bullets/bullets', locals: { bullets: @bullets }, formats: [:html] }
+    end
+  end
+
+  def list_people
+  @people = current_user.bullets.pluck(:person).compact
+  respond_to do |format|
+    format.html { render json: @people }
+    format.json { render json: @people }
     end
   end
 
 private
 
   def bullet_params
-    params.permit(:content, :person)
+    params.permit(:content, :person, :status, :id, :event)
   end
 
   def set_user

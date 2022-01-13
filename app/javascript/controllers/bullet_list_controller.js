@@ -2,7 +2,7 @@ import { Controller } from "stimulus";
 import { csrfToken } from "@rails/ujs";
 
 export default class extends Controller {
-  static targets = ['bullet', 'input', 'liBullet', 'inputDate', "dateNow"];
+  static targets = ['bullet', 'input', 'liBullet', 'inputDate', "dateNow", "new"];
 
   connect() {
     let datesSelect = document.querySelectorAll('[aria-label="January 3, 2022"]');
@@ -11,10 +11,24 @@ export default class extends Controller {
   create(event){
     event.preventDefault();
     const url = "";
+    console.log("TOTO")
+    // Ajout de Resonsable @person a la bullet
+    let formData = new FormData(this.newTarget)
+    for (var value of formData) {
+      if (value[0] === "content") {
+        // if value contains @ recupere le name de la personne et stocke dans une variable
+        if (value[1].match(/@(\w+)/)) {
+          let personName = value[1].match(/@(\w+)/)[1];
+          // ajoute @person dans FormData
+          console.log(personName);
+          formData.append('person', personName);
+        }
+      }
+    }
     fetch(url, {
       method: 'POST',
       headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
-      body: new FormData(this.newTarget)
+      body: formData
     })
       .then(response => response.json())
       .then((data) => {
@@ -40,42 +54,45 @@ export default class extends Controller {
 
     if (event.ctrlKey && event.key === "Enter") {
       let dateStart = document.querySelector("#bullet_start_time").value;
-      console.log();
       let dateCalendar = this.dateNowTarget.textContent
-      // try {
-      //   // dateStart = this.inputDateTarget.value;
-      // } catch (error) {
-      //   dateStart = dateCalendar;
-      // }
-
-      // BUG ICI
       const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
-      // le Form ne s affiche pas en entier
-      fetch(urlEvent, {
-        method: 'POST',
-        headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
-        // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
-        body: JSON.stringify({ "title": inputValue.value, "day_start": dateStart, "bullet_id": bulletId })
-        // body: new FormData(this.bulleteventTarget)
-      })
-        .then(response => response.json())
-        .then((data) => {
-          const eventList = document.querySelector("#events-list");
-          this.liBulletTarget.remove();
-          // this.liBulletTarget.classList.add("btn-primary")
+      if (inputValue.value.match(/@(\w+)/)) {
+        fetch(url, {
+          method: 'PATCH',
+          headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken()  },
+          body: JSON.stringify({"status": "Delegated"})
+        })
+          .then(response => response.json())
+          .then((data) => {
+            // console.log(data);
+          })
+      } else {
+        fetch(urlEvent, {
+          method: 'POST',
+          headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
+          // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
+          body: JSON.stringify({ "title": inputValue.value, "day_start": dateStart, "bullet_id": bulletId })
+          // body: new FormData(this.bulleteventTarget)
+        })
+          .then(response => response.json())
+          .then((data) => {
+            const eventList = document.querySelector("#events-list");
+            this.liBulletTarget.remove();
+            // this.liBulletTarget.classList.add("btn-primary")
 
-          eventList.insertAdjacentHTML("beforeend",
-            `<div id="event-${data.id}" class="event">
-            <div class="title">
-              <p id="title-content">${data.title}</p>
-            </div>
-            <div class="time">
-              <div class="time-from">
-              <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+            eventList.insertAdjacentHTML("beforeend",
+              `<div id="event-${data.id}" class="event">
+              <div class="title">
+                <p id="title-content">${data.title}</p>
               </div>
-            </div>
-          </div>`)
-        });
+              <div class="time">
+                <div class="time-from">
+                <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+                </div>
+              </div>
+            </div>`)
+          });
+        }
 
       this.liBulletTarget.classList.add("planned");
       setTimeout(() => { this.liBulletTarget.remove(); }, 1000);
