@@ -1,12 +1,12 @@
 <div class="bullet-list" data-search-bullets-target="list" id="bullet-list" data-controller="drag-item" data-action="dragstart->drag-item#dragstart ondragend->drag-item#dragend ondragenter->drag-item#dragenter ondragleave->drag-item#dragleave ondrop->drag-item#dragdrop">
-    <%= render "shared/searchbar" %>
+    <%= render "shared/top_filters" %>
   <ul>
     <% bullets.each do |bullet|  %>
     <li data-controller="bullet-list" data-bullet-list-target="liBullet" data-eventList-target="liBullet" draggable="true">
       <p class="d-none" id="today" data-bullet-list-target="dateNow"><%= Date.today %></p>
       <%= form_with url: bullet_path(bullet),
         method: :patch,
-        local: false,
+        # local: false,
         html:
           {
             id: "bullet-#{bullet.id}",
@@ -21,7 +21,7 @@
     <% end %>
     <li>
       <%= form_with url: bullets_path,
-        method: :post,
+        # method: :post,
         # local: false,
         html: { id: "bullet-new",
           data: { bullet_list_target: "new",
