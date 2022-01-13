@@ -23,13 +23,14 @@
 
 
 .animation-typing p {
-  font-family: IBM Plex Mono, monospace;
+  font-family: 'Satisfy', cursive;
+  letter-spacing: 0.3em;
   font-size: 45px;
   font-weight: lighter;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  animation: typing 3.5s steps(22);
+  animation: typing 3.5s steps(21);
 }
 
 .animation-typing p::after {
