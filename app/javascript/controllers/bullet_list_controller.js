@@ -11,7 +11,6 @@ export default class extends Controller {
   create(event){
     event.preventDefault();
     const url = "";
-    console.log("TOTO")
     // Ajout de Resonsable @person a la bullet
     let formData = new FormData(this.newTarget)
     for (var value of formData) {
@@ -20,7 +19,6 @@ export default class extends Controller {
         if (value[1].match(/@(\w+)/)) {
           let personName = value[1].match(/@(\w+)/)[1];
           // ajoute @person dans FormData
-          console.log(personName);
           formData.append('person', personName);
         }
       }
@@ -32,7 +30,6 @@ export default class extends Controller {
     })
       .then(response => response.json())
       .then((data) => {
-        console.log(data);
       });
   }
 
@@ -40,10 +37,8 @@ export default class extends Controller {
   update(event) {
     event.preventDefault();
     const url = `${this.bulletTarget.action}`;
-    let inputValue = this.inputTarget.querySelector('input')
-    // console.log(inputValue.value)
     let bulletId = this.bulletTarget.id.replace("bullet-", "")
-    //console.log(this.dateNowTarget.textContent);
+    let inputValue = this.inputTarget.querySelector('input').value
     // create event with :;
     if (event.key === ":" && event.ctrlKey) {
       //insert form for Date
@@ -53,10 +48,28 @@ export default class extends Controller {
     }
 
     if (event.ctrlKey && event.key === "Enter") {
+      // Date a vérif pb replace
       let dateStart = document.querySelector("#bullet_start_time").value;
-      let dateCalendar = this.dateNowTarget.textContent
+      // if content === !2022-02-31
+      const regexDate = /!(\d+-\d+-\d+)/
+      if (inputValue.match(regexDate)) {
+        dateStart = inputValue.match(regexDate)[1]
+        inputValue = inputValue.replace(regexDate, "");
+      }
+      // if content === :1420
+      let heureStart
+      const regexHeure = /:(\d{4})/
+      if (inputValue.match(regexHeure)) {
+        heureStart = inputValue.match(regexHeure)[1]
+        inputValue = inputValue.replace(regexHeure, "");
+        heureStart = heureStart.substring(0, 2) + ":" + heureStart.substring(2, heureStart.length)
+      }
+      if(dateStart === "") {
+        dateStart = this.dateNowTarget.textContent
+      }
+      // Status Delegated
       const urlEvent = this.bulletTarget.action.replace(/bullets\/\d+/, "events")
-      if (inputValue.value.match(/@(\w+)/)) {
+      if (inputValue.match(/@(\w+)/)) {
         fetch(url, {
           method: 'PATCH',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken()  },
@@ -64,33 +77,34 @@ export default class extends Controller {
         })
           .then(response => response.json())
           .then((data) => {
-            // console.log(data);
           })
       } else {
         fetch(urlEvent, {
           method: 'POST',
           headers: { 'Accept': "application/json", 'Content-Type': "application/json", 'X-CSRF-Token': csrfToken() },
           // "title"=> "je veux mangera", "day_start"=> "2022-01-06"
-          body: JSON.stringify({ "title": inputValue.value, "day_start": dateStart, "bullet_id": bulletId })
+          body: JSON.stringify({ "title": inputValue, "hour_start": heureStart, "day_start": dateStart, "bullet_id": bulletId })
           // body: new FormData(this.bulleteventTarget)
         })
           .then(response => response.json())
           .then((data) => {
+            let dateStart = document.querySelector("#bullet_start_time").value
             const eventList = document.querySelector("#events-list");
-            this.liBulletTarget.remove();
             // this.liBulletTarget.classList.add("btn-primary")
-
-            eventList.insertAdjacentHTML("beforeend",
-              `<div id="event-${data.id}" class="event">
-              <div class="title">
-                <p id="title-content">${data.title}</p>
-              </div>
-              <div class="time">
-                <div class="time-from">
-                <p>${data.hour_start ? data.hour_start.strftime("%H:%M") : "--:--"} </p>
+            dateStart !== "" ? dateStart : dateStart = this.dateNowTarget.textContent
+            if (data.day_start === dateStart) {
+              eventList.insertAdjacentHTML("beforeend",
+                `<div id="event-${data.id}" class="event">
+                <div class="title">
+                  <p id="title-content">${data.title}</p>
                 </div>
-              </div>
-            </div>`)
+                <div class="time">
+                  <div class="time-from">
+                  <p>${data.hour_start ? data.hour_start.match(/(\d{2}:\d{2})/)[1] : "--:--"} </p>
+                  </div>
+                </div>
+              </div>`)
+            }
           });
         }
 
@@ -123,7 +137,6 @@ export default class extends Controller {
         if (value[1].match(/@(\w+)/)) {
           let personName = value[1].match(/@(\w+)/)[1];
           // ajoute @person dans FormData
-          console.log(personName);
           formData.append('person', personName);
         }
       }
@@ -135,7 +148,6 @@ export default class extends Controller {
     })
       .then(response => response.text())
       .then((data) => {
-        // console.log(data);
       })
   }
 }
