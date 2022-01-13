@@ -11,10 +11,11 @@ application.load(definitionsFromContext(context))
 // --- from https://github.com/adrienpoly/stimulus-flatpickr
 // import Flatpickr
 import Flatpickr from 'stimulus-flatpickr'
+// import 'flatpickr/dist/themes/dark.css'
+// import 'flatpickr/dist/flatpickr.css'
 
 // Import style for flatpickr
 if (localStorage.getItem('darkMode') !== "enabled") {
-  console.log("Salut");
   require("flatpickr/dist/flatpickr.css");
 } else {
   require("flatpickr/dist/themes/dark.css");
@@ -26,4 +27,3 @@ if (localStorage.getItem('darkMode') !== "enabled") {
 application.register('flatpickr', Flatpickr)
 
 // --- from https://github.com/adrienpoly/stimulus-flatpickr
-

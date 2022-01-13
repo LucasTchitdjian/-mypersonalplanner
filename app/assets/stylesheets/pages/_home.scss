@@ -54,15 +54,17 @@ h2 {
 
 .main-div {
   display: flex;
-  align-items: space-between;
+  align-content: space-around;
   padding-top: 100px;
+  margin: auto;
+  width: 950px;
 }
 
 .bullet-list {
   position: relative;
   // background-color: red;
   padding-top: 20px;
-  width: 75%;
+  width: 65%; //Ancienement 75%;
   // flex-grow: 1;
 }
 
