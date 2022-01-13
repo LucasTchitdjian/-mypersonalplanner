@@ -8,7 +8,7 @@ const questionBtn = () => {
     } else {
         const code = `
         <div class="title-shortcuts">
-        <p>SHORTCUTS</p>  
+        <p>SHORTCUTS</p>
         </div>
         <div class="shortcuts-container-test">
           <div class="left-element">
@@ -18,6 +18,8 @@ const questionBtn = () => {
               <li>Browse between bullets</li>
               <li>Plan a bullet on selected date</li>
               <li>Delegate bullet to @</li>
+              <li>Inline date insertion</li>
+              <li>Inline time insertion</li>
             </ul>
           </div>
           <div class="right-element">
@@ -26,6 +28,8 @@ const questionBtn = () => {
             <p>TAB / SHIFT + TAB</p>
             <p>CTRL + Enter</p>
             <p>CTRL + Enter</p>
+            <p>!YYYY-MM-DD</p>
+            <p>:HHMM</p>
           </div>
         </div>`
         const shortcuts = document.createElement('div');
