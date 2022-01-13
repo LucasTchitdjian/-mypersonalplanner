@@ -6,6 +6,7 @@ export default class extends Controller {
 
   showEventsByDay() {
     let inputSearch = document.querySelector(".inputPgSearch");
+    console.log("input search")
     let date = this.inputDateTarget.value;
     const url = inputSearch.action;
     fetch(`${url}events/?query=date_start:${date}`,
